@@ -63,7 +63,8 @@
           "specialProgram": "미니 퀴즈",
           "activity": "주간 자기평가지 작성"
         }
-      ]
+      ],
+      "hidden": true
     },
     {
       "id": "w2-1787230031154",
