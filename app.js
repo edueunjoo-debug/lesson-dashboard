@@ -83,7 +83,13 @@ async function loadData() {
 function render() {
   document.body.classList.toggle("admin-on", state.adminMode);
   $("#course-title").textContent = `${state.data.courseName || "과정"} 수업 단계향상목표 대시보드`;
-  const weeks = [...state.data.weeks].sort((a, b) => a.weekNumber - b.weekNumber);
+  let weeks = [...state.data.weeks].sort((a, b) => a.weekNumber - b.weekNumber);
+
+  // 보는 사람(비관리자)에게는 숨긴 주차를 아예 보여주지 않음.
+  // 강사 모드에서는 숨긴 주차도 흐리게 표시해서 다시 보이기 처리를 할 수 있게 함.
+  if (!state.adminMode) {
+    weeks = weeks.filter((w) => !w.hidden);
+  }
 
   if (weeks.length === 0) {
     weeksContainer.innerHTML = `<div class="empty-state">등록된 주차가 없습니다.${state.adminMode ? " '주차 추가' 버튼으로 첫 주차를 등록하세요." : ""}</div>`;
@@ -95,25 +101,41 @@ function render() {
   weeks.forEach((w) => {
     const editBtn = document.getElementById(`edit-${w.id}`);
     if (editBtn) editBtn.addEventListener("click", () => openWeekModal(w.id));
+    const hideBtn = document.getElementById(`hide-${w.id}`);
+    if (hideBtn) hideBtn.addEventListener("click", () => toggleWeekHidden(w.id));
   });
 }
 
 function weekCardHtml(week) {
   const days = week.days && week.days.length ? week.days : [];
   const tableHtml = state.viewMode === "day" ? dayModeTableHtml(week, days) : weekModeTableHtml(days);
+  const hiddenClass = week.hidden ? " week-hidden" : "";
 
   return `
-  <section class="week-card" id="week-${week.id}">
+  <section class="week-card${hiddenClass}" id="week-${week.id}">
     <div class="week-head">
+      ${week.hidden ? `<div class="hidden-badge">🙈 숨김 (수강생/다른 강사에게 보이지 않음)</div>` : ""}
       <div class="week-title">&lt;${escapeHtml(state.data.courseName || "OO과정")} ${week.weekNumber}주차&gt; 수업 단계향상목표</div>
       ${week.focus ? `<div class="focus-line">중점: [ ${escapeHtml(week.focus)} ]</div>` : ""}
       ${week.officialGoal ? `<div class="goal-line">&lt;${week.weekNumber}주차 공식 목표&gt; [ ${escapeHtml(week.officialGoal)} ]</div>` : ""}
       <div class="week-actions">
+        <button class="btn-outline" id="hide-${week.id}">${week.hidden ? "다시 보이기" : "숨기기"}</button>
         <button class="btn-outline" id="edit-${week.id}">수정 / 삭제</button>
       </div>
     </div>
     ${tableHtml}
   </section>`;
+}
+
+async function toggleWeekHidden(weekId) {
+  const week = state.data.weeks.find((w) => w.id === weekId);
+  if (!week) return;
+  const nextHidden = !week.hidden;
+  const newData = {
+    ...state.data,
+    weeks: state.data.weeks.map((w) => (w.id === weekId ? { ...w, hidden: nextHidden } : w)),
+  };
+  await saveToGitHub(newData, `${week.weekNumber}주차 ${nextHidden ? "숨김" : "다시 보이기"}`);
 }
 
 function weekModeTableHtml(days) {
@@ -281,7 +303,8 @@ function openWeekModal(weekId) {
   const week = weekId ? state.data.weeks.find((w) => w.id === weekId) : null;
 
   $("#week-modal-title").textContent = week ? `${week.weekNumber}주차 수정` : "주차 추가";
-  $("#f-weekNumber").value = week ? week.weekNumber : (nextWeekNumber());
+  const weekNumber = week ? week.weekNumber : nextWeekNumber();
+  $("#f-weekNumber").value = weekNumber;
   $("#f-focus").value = week ? week.focus || "" : "";
   $("#f-officialGoal").value = week ? week.officialGoal || "" : "";
   $("#week-delete").style.display = week ? "inline-block" : "none";
@@ -290,9 +313,99 @@ function openWeekModal(weekId) {
     ? week.days
     : DEFAULT_DAY_LABELS.map((label) => emptyDay(label));
 
+  // 새 주차를 추가하는 경우, 이전에 입력된 주차의 날짜를 기준으로
+  // 요일에 맞는 날짜를 자동으로 미리 채워봅니다 (계산이 안 되면 그냥 빈 칸으로 둠).
+  if (!week) {
+    const autoDates = computeAutoDatesForWeek(weekNumber, days.map((d) => d.label));
+    if (autoDates) {
+      days.forEach((d, i) => {
+        if (autoDates[i]) d.date = autoDates[i];
+      });
+    }
+  }
+
   buildDayTabs(days);
   $("#week-modal").style.display = "flex";
 }
+
+/* ---------------- 날짜 자동 채우기 ---------------- */
+const KOREAN_WEEKDAY = { "일": 0, "월": 1, "화": 2, "수": 3, "목": 4, "금": 5, "토": 6 };
+
+function formatDateYMD(d) {
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
+  return `${y}-${m}-${day}`;
+}
+
+function parseYMD(str) {
+  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec((str || "").trim());
+  if (!m) return null;
+  const d = new Date(Number(m[1]), Number(m[2]) - 1, Number(m[3]));
+  return isNaN(d.getTime()) ? null : d;
+}
+
+// state.data.weeks 중 "요일 라벨(일/월/화/수/목/금/토) + 유효한 날짜"가 함께 입력된
+// 가장 이른 주차를 기준(anchor)으로 삼아, targetWeekNumber와 targetLabels에 맞는
+// 날짜 배열을 계산해서 돌려줍니다. 기준이 될 데이터가 전혀 없으면 null을 반환.
+function computeAutoDatesForWeek(targetWeekNumber, targetLabels) {
+  const sortedWeeks = [...state.data.weeks].sort((a, b) => a.weekNumber - b.weekNumber);
+  let anchor = null; // { weekNumber, sunday: Date }
+
+  for (const w of sortedWeeks) {
+    if (!w.days) continue;
+    for (const d of w.days) {
+      const wd = KOREAN_WEEKDAY[(d.label || "").trim()];
+      const parsed = parseYMD(d.date);
+      if (wd === undefined || !parsed) continue;
+      const sunday = new Date(parsed);
+      sunday.setDate(parsed.getDate() - wd);
+      anchor = { weekNumber: w.weekNumber, sunday };
+      break;
+    }
+    if (anchor) break;
+  }
+
+  if (!anchor) return null;
+
+  const targetSunday = new Date(anchor.sunday);
+  targetSunday.setDate(anchor.sunday.getDate() + (targetWeekNumber - anchor.weekNumber) * 7);
+
+  return targetLabels.map((label) => {
+    const wd = KOREAN_WEEKDAY[(label || "").trim()];
+    if (wd === undefined) return null;
+    const d = new Date(targetSunday);
+    d.setDate(targetSunday.getDate() + wd);
+    return formatDateYMD(d);
+  });
+}
+
+$("#btn-autofill-dates").addEventListener("click", () => {
+  const weekNumber = parseInt($("#f-weekNumber").value, 10);
+  if (!weekNumber) {
+    showToast("주차 번호를 먼저 입력하세요.");
+    return;
+  }
+  const panes = [...document.querySelectorAll(".day-pane")];
+  const labels = panes.map((pane) => {
+    const labelInput = pane.querySelector('input[data-key="label"]');
+    return labelInput ? labelInput.value.trim() : "";
+  });
+  const autoDates = computeAutoDatesForWeek(weekNumber, labels);
+  if (!autoDates) {
+    showToast("기준으로 쓸 날짜가 아직 없어요. 먼저 아무 주차에나 요일과 날짜를 한 번 입력해주세요.");
+    return;
+  }
+  let filled = 0;
+  panes.forEach((pane, i) => {
+    const dateInput = pane.querySelector('input[data-key="date"]');
+    if (dateInput && autoDates[i]) {
+      dateInput.value = autoDates[i];
+      filled++;
+    }
+  });
+  showToast(filled ? "날짜를 자동으로 채웠어요. 저장 전에 확인해주세요." : "요일 라벨(일/월/화/수/목/금/토)을 먼저 확인해주세요.");
+});
 
 function nextWeekNumber() {
   const nums = state.data.weeks.map((w) => w.weekNumber);
