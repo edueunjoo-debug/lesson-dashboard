@@ -1,8 +1,8 @@
 // ====== 배포 전 반드시 아래 두 값을 본인 것으로 수정하세요 ======
 // GitHub 사용자명 (예: "hong-gildong")
-const GITHUB_OWNER = "YOUR_GITHUB_USERNAME";
+const GITHUB_OWNER = "edueunjoo-debug";
 // 저장소 이름 (예: "lesson-dashboard")
-const GITHUB_REPO = "YOUR_REPO_NAME";
+const GITHUB_REPO = "lesson-dashboard";
 // data.json이 있는 브랜치명 (보통 "main")
 const GITHUB_BRANCH = "main";
 
