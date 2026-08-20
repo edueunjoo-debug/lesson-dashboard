@@ -267,7 +267,7 @@
           "label": "일",
           "date": "2026-08-16",
           "sessionNo": "16",
-          "title": "",
+          "title": "실상 특강",
           "learningGoal": "",
           "stepGoal": "",
           "classGoal": "",
@@ -280,8 +280,8 @@
         {
           "label": "월",
           "date": "2026-08-17",
-          "sessionNo": "",
-          "title": "",
+          "sessionNo": "광복절",
+          "title": "수원홍보관",
           "learningGoal": "",
           "stepGoal": "",
           "classGoal": "",
@@ -294,8 +294,8 @@
         {
           "label": "수",
           "date": "2026-08-19",
-          "sessionNo": "",
-          "title": "",
+          "sessionNo": "17",
+          "title": "계 11장",
           "learningGoal": "",
           "stepGoal": "",
           "classGoal": "",
@@ -308,16 +308,16 @@
         {
           "label": "금",
           "date": "2026-08-21",
-          "sessionNo": "",
-          "title": "",
-          "learningGoal": "",
-          "stepGoal": "",
-          "classGoal": "",
+          "sessionNo": "18",
+          "title": "계 13장",
+          "learningGoal": "1. 바다 짐승/땅 짐승\n2. 1/3씩 죽는 과정, 장막 함락",
+          "stepGoal": "1. 목사 임직식(선민 배도) 이해\n2. 어디서 예배 드려야 하는지 예배의 중요성 깨닫기 (세상 교회 예배가 표 받는 것)",
+          "classGoal": "1. 바다 짐승, 땅 짐승 이해",
           "character": "",
           "preClass": "",
-          "video": "",
+          "video": "실화\n목사 임직식 실상",
           "specialProgram": "",
-          "activity": ""
+          "activity": "1981.9.20 14시 암기"
         }
       ]
     },
