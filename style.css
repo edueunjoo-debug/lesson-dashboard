@@ -119,6 +119,26 @@ main {
 
 .admin-on .week-actions { display: flex; }
 
+.week-card.week-hidden {
+  opacity: 0.55;
+  border-top-color: #999;
+  border-style: dashed;
+  border-width: 1px 1px 1px 4px;
+  border-left-color: #999;
+}
+
+.hidden-badge {
+  position: absolute;
+  left: 18px;
+  top: 16px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #666;
+  background: #f0f0f0;
+  padding: 3px 10px;
+  border-radius: 999px;
+}
+
 table.week-table {
   width: 100%;
   border-collapse: collapse;
@@ -228,6 +248,11 @@ table.day-mode-table td.row-label {
     justify-content: flex-end;
     margin-top: 8px;
   }
+  .hidden-badge {
+    position: static;
+    display: inline-block;
+    margin-bottom: 8px;
+  }
 }
 
 .empty-state {
@@ -299,6 +324,21 @@ table.day-mode-table td.row-label {
   color: var(--muted);
   margin-top: 4px;
   line-height: 1.5;
+}
+
+.autofill-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px dashed #ddd;
+}
+.autofill-row .hint {
+  margin-top: 0;
+  flex: 1;
+  min-width: 200px;
 }
 
 .day-tabs {
