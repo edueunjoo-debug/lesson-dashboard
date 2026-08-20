@@ -140,7 +140,10 @@ async function toggleWeekHidden(weekId) {
 
 function weekModeTableHtml(days) {
   const headerCells = days
-    .map((d) => `<th>${d.sessionNo || "0"}차시 [${d.date || "날짜"}] ${d.label || ""}</th>`)
+    .map(
+      (d) =>
+        `<th><div class="th-session">${escapeHtml(d.sessionNo || "0")}차시</div><div class="th-date">[${escapeHtml(d.date || "날짜")}] ${escapeHtml(d.label || "")}</div></th>`
+    )
     .join("");
 
   const rows = FIELD_DEFS.map((f) => {
@@ -229,6 +232,7 @@ updateViewToggleLabel();
 $("#btn-admin-toggle").addEventListener("click", () => {
   if (state.adminMode) {
     state.adminMode = false;
+    removeAdminOnlyButtons();
     render();
     return;
   }
@@ -274,6 +278,15 @@ function ensureAddButton() {
   $(".controls").insertBefore(btn, $("#btn-admin-toggle"));
 }
 
+// 강사 모드를 끌 때, 강사 전용 버튼(+ 주차 추가 / 과정명 수정)을 다시 숨김
+// (그냥 보는 화면에는 보기 전환 / 새로고침 / 강사 모드 버튼만 남도록)
+function removeAdminOnlyButtons() {
+  const addBtn = $("#btn-add-week");
+  if (addBtn) addBtn.remove();
+  const courseBtn = $("#btn-edit-coursename");
+  if (courseBtn) courseBtn.remove();
+}
+
 // 상단 "OO과정" 과정명을 강사 모드에서 바로 바꿀 수 있는 버튼
 function ensureCourseNameButton() {
   if ($("#btn-edit-coursename")) return;
@@ -292,10 +305,6 @@ function ensureCourseNameButton() {
   });
   $(".controls").insertBefore(btn, $("#btn-admin-toggle"));
 }
-if (state.token) {
-  state.adminMode = false; // 새로고침 시엔 다시 켜야 하지만 버튼은 미리 준비
-}
-
 /* ---------------- 주차 추가/수정 모달 ---------------- */
 function openWeekModal(weekId) {
   state.editingWeekId = weekId;
@@ -608,10 +617,8 @@ async function saveToGitHub(newData, commitMessage) {
 }
 
 /* ---------------- 초기화 ---------------- */
+// 강사 전용 버튼(+ 주차 추가 / 과정명 수정)은 실제로 "강사 모드"를 켰을 때만 나타나야 하므로,
+// 토큰이 저장되어 있어도 페이지를 새로 열 때는 미리 만들지 않음.
 $("#btn-refresh").addEventListener("click", loadData);
-if (state.token) {
-  ensureAddButton();
-  ensureCourseNameButton();
-}
 
 loadData();
