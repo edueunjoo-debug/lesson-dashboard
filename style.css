@@ -163,6 +163,17 @@ table.week-table thead th:first-child {
   background: #fdf6d8;
 }
 
+table.week-table thead th .th-session {
+  color: var(--navy);
+  font-weight: 800;
+}
+
+table.week-table thead th .th-date {
+  color: #1a1a1a;
+  font-weight: 400;
+  margin-top: 3px;
+}
+
 table.week-table td.row-label, table.week-table th.row-label {
   background: var(--label-blue);
   font-weight: 700;
