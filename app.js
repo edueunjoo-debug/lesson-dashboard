@@ -82,6 +82,7 @@ async function loadData() {
 /* ---------------- 렌더링 ---------------- */
 function render() {
   document.body.classList.toggle("admin-on", state.adminMode);
+  $("#course-title").textContent = `${state.data.courseName || "과정"} 수업 단계향상목표 대시보드`;
   const weeks = [...state.data.weeks].sort((a, b) => a.weekNumber - b.weekNumber);
 
   if (weeks.length === 0) {
