@@ -265,8 +265,8 @@
       "days": [
         {
           "label": "일",
-          "date": "",
-          "sessionNo": "",
+          "date": "2026-08-16",
+          "sessionNo": "16",
           "title": "",
           "learningGoal": "",
           "stepGoal": "",
@@ -279,7 +279,7 @@
         },
         {
           "label": "월",
-          "date": "",
+          "date": "2026-08-17",
           "sessionNo": "",
           "title": "",
           "learningGoal": "",
@@ -293,7 +293,7 @@
         },
         {
           "label": "수",
-          "date": "",
+          "date": "2026-08-19",
           "sessionNo": "",
           "title": "",
           "learningGoal": "",
@@ -307,7 +307,7 @@
         },
         {
           "label": "금",
-          "date": "",
+          "date": "2026-08-21",
           "sessionNo": "",
           "title": "",
           "learningGoal": "",
