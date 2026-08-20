@@ -128,6 +128,70 @@
           "activity": ""
         }
       ]
+    },
+    {
+      "id": "w3-1787230097687",
+      "weekNumber": 3,
+      "focus": "",
+      "officialGoal": "",
+      "days": [
+        {
+          "label": "일",
+          "date": "",
+          "sessionNo": "",
+          "title": "",
+          "learningGoal": "",
+          "stepGoal": "",
+          "classGoal": "",
+          "character": "",
+          "preClass": "",
+          "video": "",
+          "specialProgram": "",
+          "activity": ""
+        },
+        {
+          "label": "월",
+          "date": "",
+          "sessionNo": "",
+          "title": "",
+          "learningGoal": "",
+          "stepGoal": "",
+          "classGoal": "",
+          "character": "",
+          "preClass": "",
+          "video": "",
+          "specialProgram": "",
+          "activity": ""
+        },
+        {
+          "label": "수",
+          "date": "",
+          "sessionNo": "",
+          "title": "",
+          "learningGoal": "",
+          "stepGoal": "",
+          "classGoal": "",
+          "character": "",
+          "preClass": "",
+          "video": "",
+          "specialProgram": "",
+          "activity": ""
+        },
+        {
+          "label": "금",
+          "date": "",
+          "sessionNo": "",
+          "title": "",
+          "learningGoal": "",
+          "stepGoal": "",
+          "classGoal": "",
+          "character": "",
+          "preClass": "",
+          "video": "",
+          "specialProgram": "",
+          "activity": ""
+        }
+      ]
     }
   ]
 }
