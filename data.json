@@ -1,0 +1,69 @@
+{
+  "courseName": "OO과정",
+  "weeks": [
+    {
+      "id": "w1",
+      "weekNumber": 1,
+      "focus": "기초 다지기 및 학습 태도 형성",
+      "officialGoal": "과정 오리엔테이션 및 기본 학습 습관 형성",
+      "days": [
+        {
+          "label": "일",
+          "date": "2026-08-23",
+          "sessionNo": "1",
+          "title": "오리엔테이션",
+          "learningGoal": "과정 소개 및 학습 목표 공유",
+          "stepGoal": "출석 및 기본 규칙 익히기",
+          "classGoal": "분반 친밀감 형성",
+          "character": "인사 예절 지도",
+          "preClass": "자리 배치 확인",
+          "video": "과정 소개 영상",
+          "specialProgram": "-",
+          "activity": "자기소개 카드 작성"
+        },
+        {
+          "label": "월",
+          "date": "2026-08-24",
+          "sessionNo": "2",
+          "title": "기초 개념 1",
+          "learningGoal": "1. 핵심 개념을 스스로의 언어로 설명할 수 있다\n2. 실생활 예시와 연결지어 이해한다\n3. 관련 용어 5개를 정확히 구분한다",
+          "stepGoal": "기본 용어 익히기",
+          "classGoal": "질문하는 습관 형성",
+          "character": "경청 태도 지도",
+          "preClass": "예습 확인",
+          "video": "-",
+          "specialProgram": "-",
+          "activity": "개념 정리 워크시트"
+        },
+        {
+          "label": "수",
+          "date": "2026-08-26",
+          "sessionNo": "3",
+          "title": "기초 개념 2",
+          "learningGoal": "개념 응용 연습",
+          "stepGoal": "간단한 문제 풀이",
+          "classGoal": "짝 활동으로 협력하기",
+          "character": "배려하는 말하기",
+          "preClass": "숙제 점검",
+          "video": "-",
+          "specialProgram": "-",
+          "activity": "짝 활동지"
+        },
+        {
+          "label": "금",
+          "date": "2026-08-28",
+          "sessionNo": "4",
+          "title": "주간 마무리",
+          "learningGoal": "1주차 내용 총정리",
+          "stepGoal": "스스로 점검하기",
+          "classGoal": "발표로 자신감 기르기",
+          "character": "칭찬하는 말하기",
+          "preClass": "발표 순서 안내",
+          "video": "-",
+          "specialProgram": "미니 퀴즈",
+          "activity": "주간 자기평가지 작성"
+        }
+      ]
+    }
+  ]
+}

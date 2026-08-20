@@ -1,0 +1,393 @@
+:root {
+  --navy: #1f2f6e;
+  --red: #d32f2f;
+  --green: #1e7d32;
+  --header-yellow: #fdf6d8;
+  --label-blue: #dbe9f7;
+  --border: #2b2b2b;
+  --page-bg: #f4f5f7;
+  --card-bg: #ffffff;
+  --muted: #6b7280;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", sans-serif;
+  background: var(--page-bg);
+  color: #1a1a1a;
+}
+
+header.top-bar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--card-bg);
+  border-bottom: 1px solid #ddd;
+  padding: 14px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+header.top-bar h1 {
+  font-size: 20px;
+  color: var(--navy);
+  margin: 0;
+}
+
+.top-bar .status {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.controls {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 14px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.btn-primary { background: var(--navy); color: #fff; }
+.btn-primary:hover { background: #16204c; }
+.btn-outline { background: #fff; color: var(--navy); border: 1px solid var(--navy); }
+.btn-outline:hover { background: #eef1fa; }
+.btn-danger { background: #fff; color: var(--red); border: 1px solid var(--red); }
+.btn-danger:hover { background: #fdeaea; }
+
+main {
+  max-width: 1200px;
+  margin: 24px auto 80px;
+  padding: 0 20px;
+}
+
+.week-card {
+  background: var(--card-bg);
+  border-radius: 10px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  margin-bottom: 28px;
+  overflow: hidden;
+  border-top: 4px solid var(--navy);
+}
+
+.week-card .week-head {
+  padding: 18px 22px 10px;
+  text-align: center;
+  position: relative;
+}
+
+.week-card .week-title {
+  font-size: 19px;
+  font-weight: 800;
+  color: var(--navy);
+  letter-spacing: -0.2px;
+}
+
+.week-card .focus-line {
+  margin-top: 8px;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--red);
+}
+
+.week-card .goal-line {
+  margin-top: 4px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--green);
+}
+
+.week-actions {
+  position: absolute;
+  right: 18px;
+  top: 16px;
+  display: none;
+  gap: 6px;
+}
+
+.admin-on .week-actions { display: flex; }
+
+table.week-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+table.week-table th, table.week-table td {
+  border: 1px solid var(--border);
+  padding: 8px 10px;
+  font-size: 13.5px;
+  vertical-align: top;
+  text-align: left;
+}
+
+table.week-table thead th {
+  background: var(--header-yellow);
+  text-align: center;
+  font-weight: 700;
+}
+
+table.week-table thead th:first-child {
+  background: #fdf6d8;
+}
+
+table.week-table td.row-label, table.week-table th.row-label {
+  background: var(--label-blue);
+  font-weight: 700;
+  white-space: nowrap;
+  width: 130px;
+  text-align: center;
+}
+
+table.week-table td.title-cell {
+  font-weight: 700;
+}
+
+/* 번호 매긴 목표가 여러 줄일 때, 줄바꿈된 두 번째 줄부터 번호가 아니라
+   텍스트 시작 위치에 맞춰 정렬되도록 매다는 들여쓰기를 적용 */
+table.week-table td .num-line {
+  padding-left: 1.15em;
+  text-indent: -1.15em;
+}
+table.week-table td .num-line + .num-line {
+  margin-top: 4px;
+}
+
+/* ---- 하루씩 보기 (모바일 친화) ---- */
+.mobile-day-tabs {
+  display: flex;
+  gap: 6px;
+  padding: 0 22px;
+  flex-wrap: wrap;
+}
+
+.mini-day-tab {
+  background: #eef1fa;
+  color: var(--navy);
+  font-weight: 700;
+  padding: 7px 16px;
+  border-radius: 999px;
+}
+
+.mini-day-tab.active {
+  background: var(--navy);
+  color: #fff;
+}
+
+.day-session-label {
+  padding: 10px 22px 0;
+  font-size: 13px;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+table.day-mode-table {
+  margin-top: 10px;
+}
+
+table.day-mode-table td.row-label {
+  width: 110px;
+}
+
+@media (max-width: 700px) {
+  header.top-bar {
+    padding: 10px 14px;
+  }
+  header.top-bar h1 {
+    font-size: 16px;
+    width: 100%;
+  }
+  .top-bar .status {
+    display: none;
+  }
+  main {
+    padding: 0 10px;
+    margin-top: 14px;
+  }
+  .week-card .week-title {
+    font-size: 16px;
+  }
+  table.week-table th, table.week-table td {
+    padding: 7px 8px;
+    font-size: 13px;
+  }
+  .week-actions {
+    position: static;
+    justify-content: flex-end;
+    margin-top: 8px;
+  }
+}
+
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--muted);
+}
+
+/* ---- Admin form ---- */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 40px 16px;
+  overflow-y: auto;
+  z-index: 100;
+}
+
+.modal {
+  background: #fff;
+  border-radius: 10px;
+  max-width: 900px;
+  width: 100%;
+  padding: 24px;
+}
+
+.modal h2 {
+  margin-top: 0;
+  color: var(--navy);
+  font-size: 18px;
+}
+
+.field-row {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.field-row label { font-size: 13.5px; font-weight: 600; color: #333; }
+.field-row input, .field-row textarea {
+  width: 100%;
+  padding: 7px 9px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-family: inherit;
+  font-size: 13.5px;
+}
+
+.field-row.textarea-row {
+  align-items: flex-start;
+}
+.field-row.textarea-row label {
+  padding-top: 7px;
+}
+.field-row textarea {
+  resize: vertical;
+  min-height: 64px;
+  line-height: 1.5;
+  white-space: pre-wrap;
+}
+.field-row .hint {
+  font-size: 11.5px;
+  font-weight: 400;
+  color: var(--muted);
+  margin-top: 4px;
+  line-height: 1.5;
+}
+
+.day-tabs {
+  display: flex;
+  gap: 6px;
+  margin: 16px 0 10px;
+}
+
+.day-tab-btn {
+  background: #eee;
+  color: #333;
+  padding: 6px 14px;
+  border-radius: 6px 6px 0 0;
+}
+
+.day-tab-btn.active {
+  background: var(--navy);
+  color: #fff;
+}
+
+.day-pane { display: none; border: 1px solid #ddd; border-radius: 0 8px 8px 8px; padding: 14px; }
+.day-pane.active { display: block; }
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 18px;
+  border-top: 1px solid #eee;
+  padding-top: 14px;
+}
+
+.hint {
+  font-size: 12.5px;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+.token-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.toast {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1a1a1a;
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 6px;
+  font-size: 13.5px;
+  z-index: 200;
+  opacity: 0;
+  transition: opacity 0.25s;
+  pointer-events: none;
+}
+.toast.show { opacity: 1; }
+
+/* ---- 입장 비밀번호 화면 ---- */
+html.gate-locked header.top-bar,
+html.gate-locked main {
+  display: none;
+}
+
+.gate-modal {
+  max-width: 340px;
+  text-align: center;
+}
+
+.gate-modal #gate-password-input {
+  width: 100%;
+  padding: 9px 10px;
+  margin: 14px 0 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.gate-modal .gate-error {
+  display: none;
+  color: var(--red);
+  font-size: 13px;
+  margin-bottom: 10px;
+}
+
+.gate-modal .btn-primary {
+  width: 100%;
+}
