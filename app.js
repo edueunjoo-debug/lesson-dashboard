@@ -214,6 +214,7 @@ $("#btn-admin-toggle").addEventListener("click", () => {
     render();
     showToast("강사 모드로 전환되었습니다.");
     ensureAddButton();
+    ensureCourseNameButton();
   } else {
     $("#token-modal").style.display = "flex";
   }
@@ -236,6 +237,7 @@ $("#token-save").addEventListener("click", () => {
   state.adminMode = true;
   render();
   ensureAddButton();
+  ensureCourseNameButton();
   showToast("강사 모드로 전환되었습니다.");
 });
 
@@ -246,6 +248,25 @@ function ensureAddButton() {
   btn.className = "btn-primary";
   btn.textContent = "+ 주차 추가";
   btn.addEventListener("click", () => openWeekModal(null));
+  $(".controls").insertBefore(btn, $("#btn-admin-toggle"));
+}
+
+// 상단 "OO과정" 과정명을 강사 모드에서 바로 바꿀 수 있는 버튼
+function ensureCourseNameButton() {
+  if ($("#btn-edit-coursename")) return;
+  const btn = document.createElement("button");
+  btn.id = "btn-edit-coursename";
+  btn.className = "btn-outline";
+  btn.textContent = "과정명 수정";
+  btn.addEventListener("click", async () => {
+    const current = state.data.courseName || "";
+    const next = window.prompt("과정 이름을 입력하세요 (예: 초등 논술반 A반)", current);
+    if (next === null) return; // 취소
+    const trimmed = next.trim();
+    if (!trimmed || trimmed === current) return;
+    const newData = { ...state.data, courseName: trimmed };
+    await saveToGitHub(newData, `과정명 변경: ${trimmed}`);
+  });
   $(".controls").insertBefore(btn, $("#btn-admin-toggle"));
 }
 if (state.token) {
@@ -474,6 +495,9 @@ async function saveToGitHub(newData, commitMessage) {
 
 /* ---------------- 초기화 ---------------- */
 $("#btn-refresh").addEventListener("click", loadData);
-if (state.token) ensureAddButton();
+if (state.token) {
+  ensureAddButton();
+  ensureCourseNameButton();
+}
 
 loadData();
