@@ -327,13 +327,13 @@
     },
     {
       "id": "w6-1787234206410",
-      "weekNumber": 19,
+      "weekNumber": 6,
       "focus": "생명책, 예배의 중요성",
       "officialGoal": "생명책 녹명",
       "days": [
         {
           "label": "일",
-          "date": "2026-11-22",
+          "date": "2026-08-23",
           "sessionNo": "",
           "title": "",
           "learningGoal": "",
@@ -347,7 +347,7 @@
         },
         {
           "label": "월",
-          "date": "2026-11-23",
+          "date": "2026-08-24",
           "sessionNo": "",
           "title": "",
           "learningGoal": "",
@@ -361,7 +361,7 @@
         },
         {
           "label": "수",
-          "date": "2026-11-25",
+          "date": "2026-08-26",
           "sessionNo": "",
           "title": "",
           "learningGoal": "",
@@ -375,7 +375,7 @@
         },
         {
           "label": "금",
-          "date": "2026-11-27",
+          "date": "2026-08-28",
           "sessionNo": "",
           "title": "",
           "learningGoal": "",
