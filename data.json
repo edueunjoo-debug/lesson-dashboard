@@ -329,21 +329,21 @@
       "id": "w6-1787234206410",
       "weekNumber": 6,
       "focus": "생명책, 예배의 중요성",
-      "officialGoal": "생명책 녹명",
+      "officialGoal": "생명책 녹명의 필요성, 신천지 신앙 의지",
       "days": [
         {
           "label": "일",
           "date": "2026-08-23",
-          "sessionNo": "",
-          "title": "",
-          "learningGoal": "",
-          "stepGoal": "",
-          "classGoal": "",
-          "character": "",
-          "preClass": "",
-          "video": "",
-          "specialProgram": "",
-          "activity": ""
+          "sessionNo": "19",
+          "title": "[특강] 예배의 중요성",
+          "learningGoal": "1. 예배 의미, 유래, 중요성\n2. 받지 않는 예배\n3. 받으시는 예배와 장소(초림,재림)\n4. 예배 구성-말씀,찬양,기도,헌금,자세",
+          "stepGoal": "1. 주일 예배, 수요 예배 다짐케하기\n2. 신천지 예배만 받으신다는 것 인정\n3. 헌금 결심, 복장 및 자세 교정",
+          "classGoal": "1. 주2회 예배 결심\n2. 헌금 준비, 복장 교육",
+          "character": "자신의 몸과 마음을 완전히 드리는 것\n하나님을 뵈러 오는 것이 당연하다는 것",
+          "preClass": "찬양 두곡",
+          "video": "없음",
+          "specialProgram": "없음",
+          "activity": "예배에 대한 다짐 써오기"
         },
         {
           "label": "월",
