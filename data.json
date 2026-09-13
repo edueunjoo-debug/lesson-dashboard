@@ -518,6 +518,70 @@
           "activity": ""
         }
       ]
+    },
+    {
+      "id": "w9-1789299653423",
+      "weekNumber": 9,
+      "focus": "새신자부 소개",
+      "officialGoal": "새신자 교육 듣게 하기",
+      "days": [
+        {
+          "label": "일",
+          "date": "2026-09-13",
+          "sessionNo": "",
+          "title": "실상도슨트",
+          "learningGoal": "",
+          "stepGoal": "",
+          "classGoal": "",
+          "character": "",
+          "preClass": "",
+          "video": "",
+          "specialProgram": "",
+          "activity": ""
+        },
+        {
+          "label": "월",
+          "date": "2026-09-14",
+          "sessionNo": "",
+          "title": "계 19장",
+          "learningGoal": "1. 허다한 영육의 감사와 영광\n2. 어린양의 혼인기약과 천국 잔치\n3. 백마 탄 자와 이한 검\n4. 공중의 새와 짐승의 고기",
+          "stepGoal": "1. 하나님 통치, 신천지 예배 실상\n2. 영육 결혼한 자의 복(신성)\n3. 우리도 3차전의 백마부대의 사명\n4. 고전 15:51-54 영생이 이루어짐(생명이 사망 삼킴)\n5. 시집가면 시댁의 법을 따라야 함.(가서 새신자 교육 있음 소개)",
+          "classGoal": "1. 영육 결혼의 소망, 영생의 소망\n2. 새신자 교육 소개",
+          "character": "1. 모든 모임 참석, 이제 새로운 시작",
+          "preClass": "1. 신랑 되신 예수께서.. 찬양\n2. 암송자 나와서 암송하기(자주 시켜야 함, 어른들도)\n3. 애니토리",
+          "video": "",
+          "specialProgram": "",
+          "activity": ""
+        },
+        {
+          "label": "수",
+          "date": "2026-09-16",
+          "sessionNo": "",
+          "title": "",
+          "learningGoal": "",
+          "stepGoal": "",
+          "classGoal": "",
+          "character": "",
+          "preClass": "",
+          "video": "",
+          "specialProgram": "",
+          "activity": ""
+        },
+        {
+          "label": "금",
+          "date": "2026-09-18",
+          "sessionNo": "",
+          "title": "",
+          "learningGoal": "",
+          "stepGoal": "",
+          "classGoal": "",
+          "character": "",
+          "preClass": "",
+          "video": "",
+          "specialProgram": "",
+          "activity": ""
+        }
+      ]
     }
   ]
 }
